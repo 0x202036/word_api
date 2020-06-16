@@ -2,11 +2,16 @@
 import pymysql
 class Db_Manager:
     def __init__(self,receive):
-        self.__host ="rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com"# host地址
+        # self.__host ="rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com"# host地址
+        # self.__port = 3306  # 端口号
+        # self.__user = "pydev"  # 用户名
+        # self.__password = "vFfMlvDIKyAlzvFNwjnr"  # 密码
+        # self.__db = "pyword_api_test"  # 数据库名
+        self.__host ="localhost"# host地址
         self.__port = 3306  # 端口号
-        self.__user = "pydev"  # 用户名
-        self.__password = "vFfMlvDIKyAlzvFNwjnr"  # 密码
-        self.__db = "pyword_api_test"  # 数据库名
+        self.__user = "root"  # 用户名
+        self.__password = "123456"  # 密码
+        self.__db = "water"  # 数据库名
         self.receive = receive
         self.level = receive.option.level
         self.word = receive.word
@@ -75,19 +80,15 @@ class Db_Manager:
         sentences_bak=self.get_sentences(sentences=sentences)
         length =sentences_bak[1]
         sentences_list =sentences_bak[0]
-
         '''接收的结果为一个三维数组'''
         return (self.word,word_translation,sentences_list,length)
-
 
     def get_sentences(self,sentences):
         sentences_id = sentences.split("|")  # 切割句子id
         sentences_list = [[0] * 4 for i in range(len(sentences_id))]  # 创建列表存每个句子
-        # sss={}
-        # print(sentences)
         z = 0
         for i in range(len(sentences_id)):
-            sql = "SELECT * FROM t_sentence WHERE s_id=%s"
+            sql = "SELECT * FROM t_sentence WHERE id=%s"
             self.cursor.execute(sql, sentences_id[i])
             result = self.cursor.fetchall()  # 接受全部返回内容
 
@@ -104,20 +105,6 @@ class Db_Manager:
                 sentences_list[z][2] = s_en
                 sentences_list[z][3] = s_voice
                 z = z + 1
-
-                ''' "fname":"电影名",
-                            "en":"英文原版例句",
-                            "cn":"中文翻译例句",
-                            "voice":"音频文件地址"'''
-                '''想以字典形式返回
-
-                j = {z: {
-                    "en":s_en,
-                    "cn":s_cn,
-                    "voice":s_voice,
-                    "film":f_name
-                }}
-                sss.update(j)'''
 
         length = z
         return(sentences_list,length)

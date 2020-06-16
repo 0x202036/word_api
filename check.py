@@ -34,7 +34,7 @@ class Check():
     # 查询数据库，得到密钥+时间戳的MD5值
     def __generate_md5(self,u_k):
         u_key = u_k
-        self.pwd = str(u_key) + str(self.server_time)
+        self.pwd = str(u_key) + str(self.client_time)
         chachong=self.__visited_dict.get('addr')
         # hashlib.md5加密不支持类型转换，故都转为字符串
         self.server_MD5key = hashlib.md5(self.pwd.encode("latin1")).hexdigest()
