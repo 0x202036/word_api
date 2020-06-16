@@ -19,6 +19,8 @@ def api_main():
         result = obj_check.begin_check()
         print(result)
         if result == "safe":
+            '''应为result !="safe:
+            return jsonify(result)方便测试其他数据'''
             print(1)
         else:
             obj_db_manager = db_manager.Db_Manager(receive=obj_receive)
