@@ -2,13 +2,14 @@
 import pymysql
 class Db_Manager:
     def __init__(self,receive):
-        self.__host = "localhost"  # host地址
+        self.__host ="rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com"# host地址
         self.__port = 3306  # 端口号
-        self.__user = "root"  # 用户名
-        self.__password = "123456"  # 密码
+        self.__user = "pydev"  # 用户名
+        self.__password = "vFfMlvDIKyAlzvFNwjnr"  # 密码
         self.__db = "pyword_api_test"  # 数据库名
         self.receive = receive
         self.level = receive.option.level
+        self.word = receive.word
     # 连接数据库
     # 返回连接
     def __connect(self):
@@ -25,23 +26,23 @@ class Db_Manager:
     # 得到用户信息
     # 传入用户名
     # 返回密钥 0：不存在该用户
-    #        1：用户表丢失该用户密钥
+
     def get_user_data(self):
         self.__connect()
         name = self.receive.security.uname
         sql = "SELECT * FROM t_user WHERE u_name=%s"
 
         # sql = 'select * from t_user WHERE u_name = name '
-        while True:
-            self.cursor.execute(sql)
-            result = self.cursor.fetchall()  # 接受全部返回内容
-            for row in result:
-                username = row[0]
-                key = row[1]
-            self.close()
-            if username is None:
-                return 0
-            return key
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()  # 接受全部返回内容
+        if result==():
+            return 0
+        for row in result:
+            username = row[0]
+            key = row[1]
+        self.close()
+        return key
+
 
     # 返回游标
     # 断开连接
@@ -56,12 +57,13 @@ class Db_Manager:
     #        2：服务器错误
     def get_send_data(self):
         self.__connect()
-        word =self.receive.word
-        # print(word)
-
+        word =self.word
+        print(word)
         sql = "SELECT * FROM t_word WHERE word=%s"
         self.cursor.execute(sql,word)
         result = self.cursor.fetchall()  # 接受全部返回内容
+        if result ==():
+            return "NULL"
         for row in result:
             wordT = row[0]
             word_translation = row[1]
@@ -75,7 +77,7 @@ class Db_Manager:
         sentences_list =sentences_bak[0]
 
         '''接收的结果为一个三维数组'''
-        return (word,word_translation,sentences_list,length)
+        return (self.word,word_translation,sentences_list,length)
 
 
     def get_sentences(self,sentences):

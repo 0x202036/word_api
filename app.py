@@ -14,14 +14,17 @@ def api_main():
     try:
         my_json =request.get_json()
         obj_receive = receive.Receive(my_json)
-        print(obj_receive.option.level)
+        # print(obj_receive.option.level)
         obj_check = check.Check(receive=obj_receive)
         result = obj_check.begin_check()
+        print(result)
         if result == "safe":
             print(1)
         else:
             obj_db_manager = db_manager.Db_Manager(receive=obj_receive)
             obj_get_word_data = obj_db_manager.get_send_data()
+            if obj_get_word_data == "NULL":
+                return jsonify("该单词未录入")
             obj_send = send.Send(obj_get_word_data[0], obj_get_word_data[1], obj_get_word_data[2], obj_get_word_data[3])
             fasong = get_send_json(obj_send)
         return jsonify(fasong)
