@@ -105,6 +105,23 @@ class Db_Manager:
                 sentences_list[z][2] = s_en
                 sentences_list[z][3] = s_voice
                 z = z + 1
-
+        dd = [[0] * 4 for i in range(len(sentences_id))]
         length = z
-        return(sentences_list,length)
+        print(sentences_list)
+        jh = 0
+        for s_i in range(length):
+            for s_j in range(length):
+                aaa=0
+                if (sentences_list[s_i][2] == sentences_list[s_j][2])and(aaa!=s_i):
+                    break
+                else:
+                    if aaa == s_i:
+                        dd[jh][0] = sentences_list[s_i][0]
+                        dd[jh][1] = sentences_list[s_i][1]
+                        dd[jh][2] = sentences_list[s_i][2]
+                        dd[jh][3] = sentences_list[s_i][3]
+                        jh =jh+1
+
+                    aaa = aaa + 1
+
+            return(dd,jh)
