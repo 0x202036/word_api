@@ -48,7 +48,6 @@ class Check():
         message = {}
         message[0] = self.__check_over_time()
         if message[0] == "超时！":
-            # print("想要破解密码需要在5秒之内")
             return message[0]
         else:
             message[1] = self.__visited_dict

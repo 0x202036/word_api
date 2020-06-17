@@ -51,6 +51,7 @@ class Db_Manager:
 
     # 返回游标
     # 断开连接
+
     def close(self):
         self.cursor.close()
         self.conn.close()
@@ -66,12 +67,15 @@ class Db_Manager:
         sql = "SELECT * FROM t_word WHERE word=%s"
         self.cursor.execute(sql,word)
         result = self.cursor.fetchall()  # 接受全部返回内容
+
         if result ==():
             return "NULL"
+
         for row in result:
             wordT = row[0]
             word_translation = row[1]
             sentences = row[2]
+
         if wordT is None:
             self.close()
             return 1
@@ -120,5 +124,4 @@ class Db_Manager:
                         jh =jh+1
 
                     aaa = aaa + 1
-
             return(dd,jh)
