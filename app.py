@@ -28,23 +28,10 @@ def api_main():
                 return jsonify("该单词未录入")
             obj_send = send.Send( 1,obj_get_word_data[0],obj_get_word_data[1],obj_get_word_data[2],obj_get_word_data[3])
             zhazha=dict(obj_send)
-            print(zhazha)
             j = json.dumps(obj=zhazha)
-            print(j)
             return j
     except Exception as e:
         return jsonify(msg="您的消息缺失")
-
-
-
-# #
-# # 将send对象序列化为json字符串
-# def get_send_json(obj):
-#     dict = {}
-#     dict.update(obj.__dict__)
-#     return dict
-
-
 
 if __name__ == '__main__':
     app.run()

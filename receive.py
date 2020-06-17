@@ -22,5 +22,5 @@ class Receive:
         self.security = Security(receive_dict['security'])
         self.word = receive_dict['word']
         self.option = Option(receive_dict['option'])
-        # print(self.word)
+
 

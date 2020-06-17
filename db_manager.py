@@ -63,7 +63,6 @@ class Db_Manager:
     def get_send_data(self):
         self.__connect()
         word =self.word
-        print(word)
         sql = "SELECT * FROM t_word WHERE word=%s"
         self.cursor.execute(sql,word)
         result = self.cursor.fetchall()  # 接受全部返回内容
@@ -98,7 +97,6 @@ class Db_Manager:
                 s_voice = row[3]
                 s_level = row[4]
                 f_name = row[5]
-            # print(s_level)
             if s_level == self.level:
                 sentences_list[z][0] = f_name
                 sentences_list[z][1] = s_cn
@@ -107,7 +105,6 @@ class Db_Manager:
                 z = z + 1
         dd = [[0] * 4 for i in range(len(sentences_id))]
         length = z
-        print(sentences_list)
         jh = 0
         for s_i in range(length):
             for s_j in range(length):
