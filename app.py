@@ -26,10 +26,10 @@ def api_main():
         print(4)
         result = obj_check.begin_check()
         angle = (obj_receive.word, '', [['', '', '', '']], 1)
-        if result == "safe":
+        if result != "safe":
             '''应为result !="safe:
             return jsonify(result)方便测试其他数据'''
-            angle_send = send.Send( 0,angle[0],angle[1],angle[2],angle[3])
+            angle_send = send.Send( 2,angle[0],angle[1],angle[2],angle[3])
             angle_zhazha = dict(angle_send)
             angle_j = json.dumps(obj=angle_zhazha)
             return angle_j
