@@ -38,7 +38,6 @@ class Check():
         chachong=self.__visited_dict.get('addr')
         # hashlib.md5加密不支持类型转换，故都转为字符串
         self.server_MD5key = hashlib.md5(self.pwd.encode("latin1")).hexdigest()
-
         if self.server_MD5key != self.client_MD5:
             return "休想"
 
