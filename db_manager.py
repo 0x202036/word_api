@@ -122,6 +122,5 @@ class Db_Manager:
                         dd[jh][2] = sentences_list[s_i][2]
                         dd[jh][3] = sentences_list[s_i][3]
                         jh =jh+1
-
                     aaa = aaa + 1
             return(dd,jh)
