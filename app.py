@@ -5,7 +5,7 @@ import check
 import send
 import json
 app = Flask(__name__)
-# 0:成功，1：没有单词，2：用户认证失败，3：传入数据格式错误
+# 0:成功，1：没有单词，2：用户认证失败，3：传入数据格式错误，4异常
 @app.route("/",methods=["POST"])
 #主交互函数
 #get_receive_info(raw_info):
@@ -16,7 +16,7 @@ def api_main():
         my_json =request.get_json()
         obj_receive = receive.Receive(my_json)
         if obj_receive.stage==3:
-            angle11 = (obj_receive.word, '', [['', '', '', '']], 1)
+            angle11 = (obj_receive.word, '', [], 1)
             angle_send11 = send.Send(3, angle11[0], angle11[1], angle11[2], angle11[3])
             angle_zhazha11 = dict(angle_send11)
             angle_j11 = json.dumps(obj=angle_zhazha11)
@@ -48,7 +48,7 @@ def api_main():
             return j
 
     except Exception as e:
-        angle12 =("", '', [['', '', '', '']], 1)
+        angle12 =("", '', [], 1)
         angle_send = send.Send( 4,angle12[0],angle12[1],angle12[2],angle12[3])
         angle_zhazha = dict(angle_send)
         angle_j = json.dumps(obj=angle_zhazha)

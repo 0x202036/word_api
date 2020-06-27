@@ -25,7 +25,11 @@ class Send:
         self.statue =statue
         self.word = word
         self.trans = trans
-        self.sentences = self.sentsss(sentence_list,length)
+        tt=sentence_list
+        if(tt==[['', '', '', '']]):
+            self.sentences = []
+        else:
+            self.sentences = self.sentsss(sentence_list,length)
 
     def keys(self):
         return ('statue','word','trans' ,'sentences')

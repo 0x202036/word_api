@@ -61,4 +61,3 @@ class Check():
                 return message[2]
             else:
                 return "safe"
-
