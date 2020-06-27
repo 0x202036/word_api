@@ -26,10 +26,13 @@ class Send:
         self.word = word
         self.trans = trans
         tt=sentence_list
+        print(tt)
         if(tt==[['', '', '', '']]):
             self.sentences = []
         else:
-            self.sentences = self.sentsss(sentence_list,length)
+            # print("例句正常")
+            print(tt)
+            self.sentences = self.sentsss(tt,length)
 
     def keys(self):
         return ('statue','word','trans' ,'sentences')
@@ -40,6 +43,7 @@ class Send:
     def sentsss(self,sentence_list,length):
         vam =[]
         sent = sentence_list
+        print(sent)
         for i in range(length):
             hhh =dict(Sentence(sent[i][0], sent[i][1], sent[i][2], sent[i][3]))
             vam.append(hhh)

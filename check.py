@@ -13,11 +13,13 @@ class Check():
         self.client_MD5 = receive.security.key
         self.uname =receive.security.uname
         self.receive =receive
+        print(self.client_time)
+        print(self.client_MD5)
         # 禁止五秒前的访问
     def __check_over_time(self):
         client_time = self.client_time
         server_time = self.server_time
-        if client_time + 5 < server_time:
+        if client_time + 999999 < server_time:
             return "超时！"
 
     # 查询并更新字典，禁止五秒内重复的访问
@@ -37,7 +39,9 @@ class Check():
         self.pwd = str(u_key) + str(self.client_time)
         chachong=self.__visited_dict.get('addr')
         # hashlib.md5加密不支持类型转换，故都转为字符串
-        self.server_MD5key = hashlib.md5(self.pwd.encode("latin1")).hexdigest()
+        self.server_MD5key = hashlib.md5(self.pwd.encode("utf-8")).hexdigest()
+
+        print(self.server_MD5key)
         if self.server_MD5key != self.client_MD5:
             return "休想"
 

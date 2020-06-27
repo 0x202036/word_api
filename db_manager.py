@@ -2,16 +2,16 @@
 import pymysql
 class Db_Manager:
     def __init__(self,receive):
-        # self.__host ="rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com"# host地址
-        # self.__port = 3306  # 端口号
-        # self.__user = "pydev"  # 用户名
-        # self.__password = "vFfMlvDIKyAlzvFNwjnr"  # 密码
-        # self.__db = "pyword_api_test"  # 数据库名
-        self.__host ="localhost"# host地址
+        self.__host ="rm-bp1wkh230i726zd7amo.mysql.rds.aliyuncs.com"# host地址
         self.__port = 3306  # 端口号
-        self.__user = "root"  # 用户名
-        self.__password = "123456"  # 密码
-        self.__db = "water"  # 数据库名
+        self.__user = "pydev"  # 用户名
+        self.__password = "vFfMlvDIKyAlzvFNwjnr"  # 密码
+        self.__db = "pyword_api_test"  # 数据库名
+        # self.__host ="localhost"# host地址
+        # self.__port = 3306  # 端口号
+        # self.__user = "root"  # 用户名
+        # self.__password = "123456"  # 密码
+        # self.__db = "water"  # 数据库名
         self.receive = receive
         self.level = receive.option.level
         self.word = receive.word
@@ -36,6 +36,8 @@ class Db_Manager:
         self.__connect()
         name = self.receive.security.uname
         sql = "SELECT * FROM t_user WHERE u_name='%s'" % name
+
+        # sql = 'select * from t_user WHERE u_name = name '
         self.cursor.execute(sql)
         result = self.cursor.fetchall()  # 接受全部返回内容
         if result==():
@@ -65,15 +67,13 @@ class Db_Manager:
         sql = "SELECT * FROM t_word WHERE word=%s"
         self.cursor.execute(sql,word)
         result = self.cursor.fetchall()  # 接受全部返回内容
-
         if result ==():
-            return "NULL"
+            return 1
 
         for row in result:
             wordT = row[0]
             word_translation = row[1]
             sentences = row[2]
-
         if wordT is None:
             self.close()
             return 1
@@ -88,11 +88,11 @@ class Db_Manager:
         sentences_id = sentences.split("|")  # 切割句子id
         sentences_list = [[0] * 4 for i in range(len(sentences_id))]  # 创建列表存每个句子
         z = 0
+        print(sentences_id[0])
         for i in range(len(sentences_id)):
-            sql = "SELECT * FROM t_sentence WHERE id=%s"
+            sql = "SELECT * FROM t_sentence WHERE s_id=%s"
             self.cursor.execute(sql, sentences_id[i])
             result = self.cursor.fetchall()  # 接受全部返回内容
-
             for row in result:
                 s_en = row[1]
                 s_cn = row[2]
@@ -105,6 +105,8 @@ class Db_Manager:
                 sentences_list[z][2] = s_en
                 sentences_list[z][3] = s_voice
                 z = z + 1
+        if(sentences_list==[[0, 0, 0, 0]]):
+            return ([],z)
         dd = [[0] * 4 for i in range(len(sentences_id))]
         length = z
         jh = 0
