@@ -17,7 +17,9 @@ class Security:
         self.time = security_dict['time']
         if self.uname == "":
             self.stage = 3
-        elif type(self.time) != float:
+        elif type(self.time) == float or type(self.time) ==int:
+            pass
+        else:
             self.stage = 3
 
 
