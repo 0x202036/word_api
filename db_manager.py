@@ -18,14 +18,14 @@ class Db_Manager:
     # 连接数据库
     # 返回连接
     def __connect(self):
-        conn = pymysql.Connect(
+        self.conn = pymysql.Connect(
             host=self.__host,
             port=self.__port,
             user=self.__user,
             password=self.__password,
             db=self.__db,
         )
-        self.cursor = conn.cursor()  # 创建游标
+        self.cursor = self.conn.cursor()  # 创建游标
 
     #
     # 得到用户信息
@@ -35,9 +35,7 @@ class Db_Manager:
     def get_user_data(self):
         self.__connect()
         name = self.receive.security.uname
-        sql = "SELECT * FROM t_user WHERE u_name=%s"
-
-        # sql = 'select * from t_user WHERE u_name = name '
+        sql = "SELECT * FROM t_user WHERE u_name='%s'" % name
         self.cursor.execute(sql)
         result = self.cursor.fetchall()  # 接受全部返回内容
         if result==():

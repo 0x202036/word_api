@@ -54,10 +54,10 @@ class Check():
             return message[1]
         else:
             self.obj_db = db_manager.Db_Manager(self.receive)
-            key = self.obj_db.get_user_data(self)
-            message[2] = self.__generate_md5()
+            key = self.obj_db.get_user_data()
+            message[2] = self.__generate_md5(key)
             if message[2] == "休想":
-                db_manager.Db_Manager.close()
+                #self.obj_db.close()
                 return message[2]
             else:
                 return "safe"
