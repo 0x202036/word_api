@@ -112,7 +112,7 @@ class Db_Manager:
         for s_i in range(z):
             for s_j in range(z):
                 if (sentences_list[s_i][2] == sentences_list[s_j][2]) and (s_j != s_i):
-                    continue
+                    break
                 elif s_j == s_i and sentences_list[s_i][2] == sentences_list[s_j][2]:
                     dd[jh][0] = sentences_list[s_i][0]
                     dd[jh][1] = sentences_list[s_i][1]
