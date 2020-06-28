@@ -28,10 +28,15 @@ class Option:
     # 传入例句难度
     def __init__(self, option_dict):
         self.stage=0
+        self.count= option_dict['count']
         self.level = option_dict['level']
         if self.level == "":
             self.stage = 3
-        elif type(self.level) != int:
+        elif type(self.count) != int:
+            self.stage = 3
+        if self.level == "":
+            self.stage = 3
+        elif type(self.count) != int:
             self.stage = 3
 
 class Receive:

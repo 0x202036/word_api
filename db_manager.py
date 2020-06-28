@@ -15,6 +15,7 @@ class Db_Manager:
         self.receive = receive
         self.level = receive.option.level
         self.word = receive.word
+        self.count = receive.option.count
     # 连接数据库
     # 返回连接
     def __connect(self):
@@ -104,6 +105,8 @@ class Db_Manager:
                 sentences_list[z][2] = s_en
                 sentences_list[z][3] = s_voice
                 z = z + 1
+            if z == self.count:
+                break
         if(sentences_list==[[0, 0, 0, 0]]):
             return ([],z)
         length = z
