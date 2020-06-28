@@ -17,7 +17,7 @@ def api_main():
         obj_receive = receive.Receive(my_json)
         if obj_receive.stage==3:
             angle11 = (obj_receive.word, '', [], 1)
-            angle_send11 = send.Send(3, angle11[0], angle11[1], angle11[2], angle11[3])
+            angle_send11 = send.Send(3, word=angle11[0], trans=angle11[1], sentence_list=angle11[2], length=angle11[3])
             angle_zhazha11 = dict(angle_send11)
             angle_j11 = json.dumps(obj=angle_zhazha11)
             return angle_j11

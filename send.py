@@ -28,8 +28,10 @@ class Send:
         tt=sentence_list
         if(tt==[['', '', '', '']]):
             self.sentences = []
-        else:
+        elif tt==[]:
+            self.sentences=[]
             # print("例句正常")
+        else:
             self.sentences = self.sentsss(tt,length)
 
     def keys(self):
