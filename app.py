@@ -49,7 +49,7 @@ def api_main():
 
     except Exception as e:
         angle12 =("", '', [], 1)
-        angle_send = send.Send( 4,angle12[0],angle12[1],angle12[2],angle12[3])
+        angle_send = send.Send( 3,angle12[0],angle12[1],angle12[2],angle12[3])
         angle_zhazha = dict(angle_send)
         angle_j = json.dumps(obj=angle_zhazha)
         print("异常")
