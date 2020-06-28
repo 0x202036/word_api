@@ -41,7 +41,8 @@ class Send:
     def sentsss(self,sentence_list,length):
         vam =[]
         sent = sentence_list
+        print(sent)
         for i in range(length):
-            hhh =dict(Sentence(sent[i][0], sent[i][1], sent[i][2], sent[i][3]))
+            hhh =dict(Sentence(sent[i][0], en=sent[i][2], cn=sent[i][1], voice=sent[i][3]))
             vam.append(hhh)
         return vam

@@ -68,7 +68,7 @@ class Db_Manager:
         self.cursor.execute(sql,word)
         result = self.cursor.fetchall()  # 接受全部返回内容
         if result ==():
-            return 1
+            return "NULL"
 
         for row in result:
             wordT = row[0]
@@ -109,17 +109,17 @@ class Db_Manager:
         length = z
         dd = [[0] * 4 for i in range(z)]
         jh = 0
-        for s_i in range(2):
-            for s_j in range(2):
+        for s_i in range(z):
+            for s_j in range(z):
                 if (sentences_list[s_i][2] == sentences_list[s_j][2]) and (s_j != s_i):
                     continue
                 elif s_j == s_i and sentences_list[s_i][2] == sentences_list[s_j][2]:
-                        dd[jh][0] = sentences_list[s_i][0]
-                        dd[jh][1] = sentences_list[s_i][1]
-                        dd[jh][2] = sentences_list[s_i][2]
-                        dd[jh][3] = sentences_list[s_i][3]
-                        jh = jh + 1
+                    dd[jh][0] = sentences_list[s_i][0]
+                    dd[jh][1] = sentences_list[s_i][1]
+                    dd[jh][2] = sentences_list[s_i][2]
+                    dd[jh][3] = sentences_list[s_i][3]
+                    jh = jh + 1
 
-                        break
+                    break
 
-            return(dd,jh)
+        return(dd,jh)
