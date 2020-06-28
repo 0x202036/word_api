@@ -19,7 +19,7 @@ class Check():
     def __check_over_time(self):
         client_time = self.client_time
         server_time = self.server_time
-        if client_time + 999999 < server_time:
+        if client_time + 5 < server_time:
             return "超时！"
 
     # 查询并更新字典，禁止五秒内重复的访问

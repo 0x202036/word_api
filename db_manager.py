@@ -88,7 +88,6 @@ class Db_Manager:
         sentences_id = sentences.split("|")  # 切割句子id
         sentences_list = [[0] * 4 for i in range(len(sentences_id))]  # 创建列表存每个句子
         z = 0
-        print(sentences_id[0])
         for i in range(len(sentences_id)):
             sql = "SELECT * FROM t_sentence WHERE s_id=%s"
             self.cursor.execute(sql, sentences_id[i])
@@ -107,20 +106,20 @@ class Db_Manager:
                 z = z + 1
         if(sentences_list==[[0, 0, 0, 0]]):
             return ([],z)
-        dd = [[0] * 4 for i in range(len(sentences_id))]
         length = z
+        dd = [[0] * 4 for i in range(z)]
         jh = 0
-        for s_i in range(length):
-            for s_j in range(length):
-                aaa=0
-                if (sentences_list[s_i][2] == sentences_list[s_j][2])and(aaa!=s_i):
-                    break
-                else:
-                    if aaa == s_i:
+        for s_i in range(2):
+            for s_j in range(2):
+                if (sentences_list[s_i][2] == sentences_list[s_j][2]) and (s_j != s_i):
+                    continue
+                elif s_j == s_i and sentences_list[s_i][2] == sentences_list[s_j][2]:
                         dd[jh][0] = sentences_list[s_i][0]
                         dd[jh][1] = sentences_list[s_i][1]
                         dd[jh][2] = sentences_list[s_i][2]
                         dd[jh][3] = sentences_list[s_i][3]
-                        jh =jh+1
-                    aaa = aaa + 1
+                        jh = jh + 1
+
+                        break
+
             return(dd,jh)
