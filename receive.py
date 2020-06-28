@@ -32,9 +32,11 @@ class Option:
         self.level = option_dict['level']
         if self.level == "":
             self.stage = 3
-        elif type(self.count) != int:
+        elif type(self.level) != int:
             self.stage = 3
-        if self.level == "":
+        elif self.level>3 or self.level<0:
+            self.stage =3
+        if self.count == "":
             self.stage = 3
         elif type(self.count) != int:
             self.stage = 3

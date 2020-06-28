@@ -99,7 +99,13 @@ class Db_Manager:
                 s_voice = row[3]
                 s_level = row[4]
                 f_name = row[5]
-            if s_level == self.level:
+            if self.level==3:
+                sentences_list[z][0] = f_name
+                sentences_list[z][1] = s_cn
+                sentences_list[z][2] = s_en
+                sentences_list[z][3] = s_voice
+                z = z + 1
+            elif s_level == self.level:
                 sentences_list[z][0] = f_name
                 sentences_list[z][1] = s_cn
                 sentences_list[z][2] = s_en
